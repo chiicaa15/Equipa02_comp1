@@ -1,0 +1,12 @@
+#MAVEN
+#Folder where Maven stores compiled files
+target/
+
+#ECLIPSE
+#Local Eclipse configuration files and folders
+.classpath
+.project
+.settings/
+
+#Folder where Eclipse places compiled files
+bin/
