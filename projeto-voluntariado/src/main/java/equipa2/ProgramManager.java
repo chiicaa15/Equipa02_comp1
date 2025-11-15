@@ -287,7 +287,7 @@ public class ProgramManager {
 		
 		boolean numero = false; //criar variavel numero e começa como false
 		for (char c: password.toCharArray()) { //para cada caracter na palavra (associa a um array)
-			if (Character.isDigit(c)) { //verifica se cada caracter é um número
+			if (Character.isDigit(c)) { //verifica se tem caracter que é um número
 				numero = true;
 				break;
 			}
@@ -295,6 +295,19 @@ public class ProgramManager {
 		
 		if(!numero) { //se for diferente de ter número
 			System.out.println("A palavra-passe tem de ter pelo menos um número");
+			return false;
+		}
+		
+		boolean letra = false;  //criar variavel letra e começa como false
+		for (char c:password.toCharArray()) {  //para cada caracter na palavra (associa a um array)
+			if (Character.isLetter(c)) {  //verifica se tem caracter que é um letra
+				letra = true;
+				break;
+			}
+		}
+		
+		if (!letra) {
+			System.out.println("A palavra-passe tem de ter pelo menos uma letra");
 			return false;
 		}
 		

@@ -43,12 +43,24 @@ public class Main {
 			case 2: 
 				System.out.println("Insira o nome: ");
 				String nomeS= input.nextLine();
+				
 				System.out.println("Insira o email: ");
 				String emailS= input.nextLine();
+				
 				System.out.println("Insira a password: ");
 				String passwordS= input.nextLine();
+				
 				System.out.println("Insira o numero: ");
-				int numeroS= input.nextInt();
+				String numeroSS = input.nextLine();
+				int numeroS;
+				try {
+					numeroS = Integer.parseInt(numeroSS); //tenta converter string em numero inteiro
+				}
+				catch (NumberFormatException e){ //erro para quando tenta transformar algo que não é número em inteiro
+					System.out.println("O número de estudante é composto apenas por números.");
+					break;
+				}
+				
 				Student student =new Student(nomeS,emailS,passwordS,numeroS);
 				manager.adicionarStudent(student);
 				break;
