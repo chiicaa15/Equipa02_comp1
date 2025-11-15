@@ -72,10 +72,10 @@ name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
       List all annotated entity classes used by Hibernate. 
       Each class must include its full package name. 
     -->         
-    <mapping class="Voluntariado.User" /> 
-    <mapping class="Voluntariado.Program" /> 
-    <mapping class="Voluntariado.Student" /> 
-    <mapping class="Voluntariado.Type" />
-    <mapping class="Voluntariado.Partner" />
+    <mapping class="equipa2.User" /> 
+    <mapping class="equipa2.Program" /> 
+    <mapping class="equipa2.Student" /> 
+    <mapping class="equipa2.Type" />
+    <mapping class="equipa2.Partner" />
   </session-factory> 
  </hibernate-configuration>

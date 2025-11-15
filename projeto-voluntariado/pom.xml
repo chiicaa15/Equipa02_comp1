@@ -3,7 +3,6 @@
   <groupId>equipa.2</groupId>
   <artifactId>projeto-voluntariado</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
   <dependencies>
   	<!-- Hibernate ORM 6.2.x-->
   	<dependency>
