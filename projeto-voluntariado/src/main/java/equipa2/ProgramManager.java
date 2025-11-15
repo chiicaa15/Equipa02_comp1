@@ -86,7 +86,11 @@ public class ProgramManager {
 	//Método para adicionar um novo User
 	public void adicionarUser(User novoUser) {
 		
-		if (!validarPalavraPasse(novoUser.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
+		if (!validarEmail(novoUser.getEmail())) {
+			return;
+		}
+		
+		else if (!validarPalavraPasse(novoUser.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
 			return;
 		}
 		
@@ -101,7 +105,11 @@ public class ProgramManager {
 	//Método para adicionar um novo estudante
 	public void adicionarStudent(Student novoStudent) {
 		
-		if (!validarPalavraPasse(novoStudent.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
+		if (!validarEmail(novoStudent.getEmail())) {
+			return;
+		}
+		
+		else if (!validarPalavraPasse(novoStudent.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
 			return;
 		}
 		
@@ -309,7 +317,7 @@ public class ProgramManager {
 		}
 		
 		if(!arroba) { //se for diferente de ter número
-			System.out.println("A palavra-passe tem de ter pelo menos um @");
+			System.out.println("A palavra-passe tem de ser do tipo 'xxx@xxx'");
 			return false;
 		}
 		
