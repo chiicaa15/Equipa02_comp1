@@ -292,5 +292,29 @@ public class ProgramManager {
 		
 		return true;
 	}
+	
+	public boolean validarEmail(String email) {
+		
+		if (email == null) {
+			System.out.println("Tem que introduzir um e-mail!");
+			return false;
+		}
+		
+		boolean arroba = false;
+		for (char a: email.toCharArray()) {
+			if (a == '@') {
+				arroba = true;
+				break;
+			}
+		}
+		
+		if(!arroba) { //se for diferente de ter número
+			System.out.println("A palavra-passe tem de ter pelo menos um @");
+			return false;
+		}
+		
+		return true;
+		
+	}
             
 }
