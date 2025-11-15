@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.hibernate.Session; 
 import org.hibernate.SessionFactory; 
@@ -335,6 +336,52 @@ public class ProgramManager {
 		}
 		
 		return true;
+		
+	}
+	
+	public void recuperarPasse(String email, Scanner input) {
+		try (Session session = sessionFactory.openSession()) { //abre sessão com o hibernate
+			Transaction tx = session.beginTransaction();
+			
+			
+			Query<User> query = session.createQuery("form User where email = :email", User.class); // procura o utilizador pelo email
+			query.setParameter("email", email);
+			List<User> users = query.list();
+			
+			if (users.isEmpty()) { //se estiver vazio
+				System.out.println("O email não existe");
+				return;
+			}
+			
+			User user = users.get(0);
+			
+			while (true) { 
+				System.out.println("Insira a sua nova palavra-passe");
+				String novaPasse = input.nextLine();
+				
+				if (novaPasse.equals(user.getPassword())){
+					System.out.println("A nova palavra-passe não pode ser igual à anterior");
+					continue; //pede novamente
+				}
+				
+				if (!validarPalavraPasse(novaPasse)) { //chama o método para validar
+					continue; //pede novamente
+				}
+				
+				user.setPassword(novaPasse);
+				session.persist(user); //persiste a alteração
+				tx.commit();
+				
+				System.out.println("A palavra-passe foi redifina com sucesso!");
+				break;
+				
+			}
+		} 
+		
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro ao recuperar a palavra-passe por: " + e.getMessage());
+		}
 		
 	}
             
