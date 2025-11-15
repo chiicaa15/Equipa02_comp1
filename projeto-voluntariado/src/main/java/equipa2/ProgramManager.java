@@ -86,7 +86,7 @@ public class ProgramManager {
 	//Método para adicionar um novo User
 	public void adicionarUser(User novoUser) {
 		
-		if (!validarEmail(novoUser.getEmail())) {
+		if (!validarEmail(novoUser.getEmail())) { //se o email fr diferente da verificação do método dá erro
 			return;
 		}
 		
@@ -105,7 +105,7 @@ public class ProgramManager {
 	//Método para adicionar um novo estudante
 	public void adicionarStudent(Student novoStudent) {
 		
-		if (!validarEmail(novoStudent.getEmail())) {
+		if (!validarEmail(novoStudent.getEmail())) {  //se o email fr diferente da verificação do método dá erro
 			return;
 		}
 		
@@ -303,20 +303,20 @@ public class ProgramManager {
 	
 	public boolean validarEmail(String email) {
 		
-		if (email == null) {
+		if (email == null) { //se estiver vazio 
 			System.out.println("Tem que introduzir um e-mail!");
 			return false;
 		}
 		
-		boolean arroba = false;
-		for (char a: email.toCharArray()) {
-			if (a == '@') {
+		boolean arroba = false; //arroba começa como falsa
+		for (char a: email.toCharArray()) { //verifica carcater a caracter
+			if (a == '@') { //se tiver um @ é true
 				arroba = true;
 				break;
 			}
 		}
 		
-		if(!arroba) { //se for diferente de ter número
+		if(!arroba) { //se não tiver arroba dá erro
 			System.out.println("A palavra-passe tem de ser do tipo 'xxx@xxx'");
 			return false;
 		}
