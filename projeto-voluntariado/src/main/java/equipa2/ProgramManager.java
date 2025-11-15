@@ -30,6 +30,31 @@ public class ProgramManager {
 		 sessionFactory = HibernateUtil.getSessionFactory(); //Inicializar ligação com base de dados
 	}
 	
+	public User loginUtilizador(String email, String pass) {
+		User user = null;
+
+	    try (Session session = sessionFactory.openSession()) {
+	        session.beginTransaction();
+
+	        Query<User> query = session.createQuery(
+	            "FROM User WHERE email = :email AND password = :pass", User.class);
+	        query.setParameter("email", email);
+	        query.setParameter("pass", pass);
+
+	        List<User> users = query.list();
+	        if (!users.isEmpty()) {
+	            user = users.get(0);
+	        }
+
+	        session.getTransaction().commit();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return user;
+	}
+
+	
 	//Método para persistir user
 	public void saveUser(User user) {
 		Transaction tx = null;
