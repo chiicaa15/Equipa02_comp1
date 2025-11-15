@@ -85,15 +85,33 @@ public class ProgramManager {
 	
 	//Método para adicionar um novo User
 	public void adicionarUser(User novoUser) {
-		users.add(novoUser);
-		saveUser(novoUser); //Chama o método saveUser para salvar user na base de dados
+		
+		if (!validarPalavraPasse(novoUser.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
+			System.out.println("Tem que inserir uma palavra-passe válida");
+			return;
+		}
+		
+		else {
+			users.add(novoUser);
+			saveUser(novoUser); //Chama o método saveUser para salvar user na base de dados
+		}
+		
 		
 	}
 	
 	//Método para adicionar um novo estudante
 	public void adicionarStudent(Student novoStudent) {
-		users.add(novoStudent);
-		saveUser(novoStudent);//Chama o método saveUser para salvar o estudante na base de dados
+		
+		if (!validarPalavraPasse(novoStudent.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
+			System.out.println("Tem que inserir uma palavra-passe válida");
+			return;
+		}
+		
+		else {
+			users.add(novoStudent);
+			saveUser(novoStudent);//Chama o método saveUser para salvar o estudante na base de dados
+		}
+		
 	}
 	
 	//Método para adicionar um tipo
