@@ -87,7 +87,6 @@ public class ProgramManager {
 	public void adicionarUser(User novoUser) {
 		
 		if (!validarPalavraPasse(novoUser.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
-			System.out.println("Tem que inserir uma palavra-passe válida");
 			return;
 		}
 		
@@ -103,7 +102,6 @@ public class ProgramManager {
 	public void adicionarStudent(Student novoStudent) {
 		
 		if (!validarPalavraPasse(novoStudent.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
-			System.out.println("Tem que inserir uma palavra-passe válida");
 			return;
 		}
 		
