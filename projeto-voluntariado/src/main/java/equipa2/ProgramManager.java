@@ -346,7 +346,7 @@ public class ProgramManager {
 			Transaction tx = session.beginTransaction();
 			
 			
-			Query<User> query = session.createQuery("form User where email = :email", User.class); // procura o utilizador pelo email
+			Query<User> query = session.createQuery("from User where email = :email", User.class); // procura o utilizador pelo email
 			query.setParameter("email", email);
 			List<User> users = query.list();
 			

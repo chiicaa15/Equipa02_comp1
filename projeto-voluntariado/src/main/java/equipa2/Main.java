@@ -79,17 +79,19 @@ public class Main {
 					System.out.println("1 - Redefinir palavra-passe");
 					System.out.println("2 - Tentar novamente");
 					
-					opcao= input.nextInt();
-					input.nextLine();
-					switch(opcao) {
-					case 1: 
+					String opcao1 = input.nextLine();
+					
+					if(opcao1.equals("1")) {
 						manager.recuperarPasse(email, input);
-						
-					case 2:
+						break;
+					}
+					
+					else if (opcao1.equals("2")) {
 						continue;
-						
-					default: 
-						System.out.println("Opção não existe");
+					}
+					
+					else {
+						System.out.println("Opção inválida.");
 					}
 					
 				}
