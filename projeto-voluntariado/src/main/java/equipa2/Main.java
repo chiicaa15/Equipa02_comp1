@@ -66,13 +66,32 @@ public class Main {
 				break;
 				
 			case 3:
-				System.out.println("Inisra o email de utilizador");
+				System.out.println("Insira o email de utilizador");
 				email=input.nextLine();
-				System.out.println("Inisra a password");
+				
+				System.out.println("Insira a password");
 				String pass= input.nextLine();
+				
 				User u=manager.loginUtilizador(email, pass);
+				
 				if(u==null) {
 					System.out.println("Credenciais erradas");
+					System.out.println("1 - Redefinir palavra-passe");
+					System.out.println("2 - Tentar novamente");
+					
+					opcao= input.nextInt();
+					input.nextLine();
+					switch(opcao) {
+					case 1: 
+						manager.recuperarPasse(email, input);
+						
+					case 2:
+						continue;
+						
+					default: 
+						System.out.println("Opção não existe");
+					}
+					
 				}
 				if (u instanceof User) {
 				    System.out.println("Bem-vindo Admin");

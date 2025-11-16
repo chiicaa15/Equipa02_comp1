@@ -315,6 +315,7 @@ public class ProgramManager {
 		return true;
 	}
 	
+	//validar Email
 	public boolean validarEmail(String email) {
 		
 		if (email == null) { //se estiver vazio 
@@ -339,6 +340,7 @@ public class ProgramManager {
 		
 	}
 	
+	//Recuperar palavra-passe
 	public void recuperarPasse(String email, Scanner input) {
 		try (Session session = sessionFactory.openSession()) { //abre sessão com o hibernate
 			Transaction tx = session.beginTransaction();
