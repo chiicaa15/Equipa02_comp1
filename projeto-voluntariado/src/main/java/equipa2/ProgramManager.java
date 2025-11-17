@@ -374,7 +374,7 @@ public class ProgramManager {
 				session.persist(user); //persiste a alteração
 				tx.commit();
 				
-				System.out.println("A palavra-passe foi redifina com sucesso!");
+				System.out.println("A palavra-passe foi redifenida com sucesso!");
 				break;
 				
 			}
