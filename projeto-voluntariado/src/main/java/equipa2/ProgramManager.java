@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.hibernate.Session; 
 import org.hibernate.SessionFactory; 
@@ -86,7 +87,11 @@ public class ProgramManager {
 	//Método para adicionar um novo User
 	public void adicionarUser(User novoUser) {
 		
-		if (!validarPalavraPasse(novoUser.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
+		if (!validarEmail(novoUser.getEmail())) { //se o email fr diferente da verificação do método dá erro
+			return;
+		}
+		
+		else if (!validarPalavraPasse(novoUser.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
 			return;
 		}
 		
@@ -101,7 +106,11 @@ public class ProgramManager {
 	//Método para adicionar um novo estudante
 	public void adicionarStudent(Student novoStudent) {
 		
-		if (!validarPalavraPasse(novoStudent.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
+		if (!validarEmail(novoStudent.getEmail())) {  //se o email fr diferente da verificação do método dá erro
+			return;
+		}
+		
+		else if (!validarPalavraPasse(novoStudent.getPassword())) {  //se a palavra-passe for diferente da verificação do método dá erro
 			return;
 		}
 		
@@ -279,7 +288,7 @@ public class ProgramManager {
 		
 		boolean numero = false; //criar variavel numero e começa como false
 		for (char c: password.toCharArray()) { //para cada caracter na palavra (associa a um array)
-			if (Character.isDigit(c)) { //verifica se cada caracter é um número
+			if (Character.isDigit(c)) { //verifica se tem caracter que é um número
 				numero = true;
 				break;
 			}
@@ -290,7 +299,92 @@ public class ProgramManager {
 			return false;
 		}
 		
+		boolean letra = false;  //criar variavel letra e começa como false
+		for (char c:password.toCharArray()) {  //para cada caracter na palavra (associa a um array)
+			if (Character.isLetter(c)) {  //verifica se tem caracter que é um letra
+				letra = true;
+				break;
+			}
+		}
+		
+		if (!letra) {
+			System.out.println("A palavra-passe tem de ter pelo menos uma letra");
+			return false;
+		}
+		
 		return true;
+	}
+	
+	//validar Email
+	public boolean validarEmail(String email) {
+		
+		if (email == null) { //se estiver vazio 
+			System.out.println("Tem que introduzir um e-mail!");
+			return false;
+		}
+		
+		boolean arroba = false; //arroba começa como falsa
+		for (char a: email.toCharArray()) { //verifica carcater a caracter
+			if (a == '@') { //se tiver um @ é true
+				arroba = true;
+				break;
+			}
+		}
+		
+		if(!arroba) { //se não tiver arroba dá erro
+			System.out.println("A palavra-passe tem de ser do tipo 'xxx@xxx'");
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
+	//Recuperar palavra-passe
+	public void recuperarPasse(String email, Scanner input) {
+		try (Session session = sessionFactory.openSession()) { //abre sessão com o hibernate
+			Transaction tx = session.beginTransaction();
+			
+			
+			Query<User> query = session.createQuery("from User where email = :email", User.class); // procura o utilizador pelo email
+			query.setParameter("email", email);
+			List<User> users = query.list();
+			
+			if (users.isEmpty()) { //se estiver vazio
+				System.out.println("O email não existe");
+				return;
+			}
+			
+			User user = users.get(0);
+			
+			while (true) { 
+				System.out.println("Insira a sua nova palavra-passe");
+				String novaPasse = input.nextLine();
+				
+				if (novaPasse.equals(user.getPassword())){
+					System.out.println("A nova palavra-passe não pode ser igual à anterior");
+					continue; //pede novamente
+				}
+				
+				if (!validarPalavraPasse(novaPasse)) { //chama o método para validar
+					continue; //pede novamente
+				}
+				
+				user.setPassword(novaPasse);
+				session.persist(user); //persiste a alteração
+				tx.commit();
+				
+				System.out.println("A palavra-passe foi redifenida com sucesso!");
+				break;
+				
+			}
+		} 
+		
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro ao recuperar a palavra-passe por: " + e.getMessage());
+		}
+		
 	}
             
 }

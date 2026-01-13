@@ -43,24 +43,57 @@ public class Main {
 			case 2: 
 				System.out.println("Insira o nome: ");
 				String nomeS= input.nextLine();
+				
 				System.out.println("Insira o email: ");
 				String emailS= input.nextLine();
+				
 				System.out.println("Insira a password: ");
 				String passwordS= input.nextLine();
+				
 				System.out.println("Insira o numero: ");
-				int numeroS= input.nextInt();
+				String numeroSS = input.nextLine();
+				int numeroS;
+				try {
+					numeroS = Integer.parseInt(numeroSS); //tenta converter string em numero inteiro
+				}
+				catch (NumberFormatException e){ //erro para quando tenta transformar algo que não é número em inteiro
+					System.out.println("O número de estudante é composto apenas por números.");
+					break;
+				}
+				
 				Student student =new Student(nomeS,emailS,passwordS,numeroS);
 				manager.adicionarStudent(student);
 				break;
 				
 			case 3:
-				System.out.println("Inisra o email de utilizador");
+				System.out.println("Insira o email de utilizador");
 				email=input.nextLine();
-				System.out.println("Inisra a password");
+				
+				System.out.println("Insira a password");
 				String pass= input.nextLine();
+				
 				User u=manager.loginUtilizador(email, pass);
+				
 				if(u==null) {
 					System.out.println("Credenciais erradas");
+					System.out.println("1 - Redefinir palavra-passe");
+					System.out.println("2 - Tentar novamente");
+					
+					String opcao1 = input.nextLine();
+					
+					if(opcao1.equals("1")) {
+						manager.recuperarPasse(email, input);
+						break;
+					}
+					
+					else if (opcao1.equals("2")) {
+						continue;
+					}
+					
+					else {
+						System.out.println("Opção inválida.");
+					}
+					
 				}
 				if (u instanceof User) {
 				    System.out.println("Bem-vindo Admin");
